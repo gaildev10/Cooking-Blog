@@ -77,6 +77,34 @@ exports.exploreRecipe = async(req, res) => {
 }
 
 
+//post/search
+
+
+
+exports.searchRecipe = async(req, res) => {
+    try {
+        let searchTerm = req.body.searchTerm;
+        let recipe = await Recipe.find ( { $text: {  $search: searchTerm , $diacriticSensitive: true } } )
+        res.render('search', { title: 'Cooking Blog - Search', recipe});
+
+    } catch (error){
+        res.status(500).send({message: error.message || 'Error Occured'}) ;   
+    }
+}
+
+//get explore-latest
+exports.exploreLatest = async(req, res) => {
+    try {
+        const limitNumber = 20;
+        const recipe = await Recipe.find( {} ).sort({_id: -1 }).limit(limitNumber);
+        res.render('explore-latest', { title: 'Cooking Blog - Explore Latest', recipe});
+
+    } catch (error){
+        res.status(500).send({message: error.message || 'Error Occured'}) ;   
+    }
+}
+
+
 
 
 

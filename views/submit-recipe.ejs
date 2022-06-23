@@ -1,12 +1,25 @@
 <div class="px-4 py-5 my-5 text-center">
     <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
     <div class="col-lg-6 mx-auto">
-        <p class="lead">Share your amazing recipies with thousands of web developers across the world. Fill out our form to get started</p>
+        <p class="lead">Share your amazing recipes with thousands of web developers across the world. Fill out our form to get started.</p>
     </div>
-
 </div>
 
+
 <div class="row justify-content-center">
+    <% if(infoSubmitObj != '') { %>
+        <div class= "col-8 alert alert-success" role="alert">
+            <%= infoSubmitObj %>
+          </div>
+          <%  } %>
+
+    <% if(infoErrorsObj != '') { %>
+        <div class= "col-8 alert alert-danger" role="alert">
+            <%= infoErrorsObj[0].message %>
+          </div>
+          <%  } %>
+
+
     <div class="col-8">
 
         <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
@@ -17,7 +30,7 @@
                 </div>
                     <div class="col-12">
                         <label for="name" class="form-label">Recipe Name</label>
-                        <input type="text" name="name" id="name" class="form-control">
+                        <input type="text" name="name" id="name" class="form-control" required>
                     </div>
                         <div class="col-12">
                             <label for="description" class="form-label">Description</label>
